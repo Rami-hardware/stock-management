@@ -7,6 +7,7 @@ const cors = require("cors")
 const bodyParser = require("body-parser")
 const app = express();
 app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.json())
 app.use(cors())
 //save & show all records & Oracle DB connction
 database.connection.connect(function (err) {
@@ -29,9 +30,11 @@ app.get("/", (req, res) => {
   console.log("Records has been send");
   res.json(dataT.load("records.json"));
 });
-
 app.post('/add',(req, res) => {
-  res.json(console.log("this is working " + ' ' + req.body.form.SID));
+  let add = {
+    id: req.body.form.id
+  }  
+  res.json(console.log("this is working " + add.id));
 })
 app.listen(5050, ()=>{
     console.log('listing at 5050')
