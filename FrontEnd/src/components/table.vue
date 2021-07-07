@@ -59,7 +59,7 @@ data() {
       }
     },methods:{
       get(){
-        fetch("https://localhost:5050").then(response => response.json).then(data => (this.items = data))
+         fetch("http://localhost:5050").then(response => response.json()).then(data => (this.items = data))
       }
     },mounted(){
       this.get();
