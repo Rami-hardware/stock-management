@@ -1,11 +1,11 @@
 <template>
   <div>
-    <b-form @submit="testMethod" method="post">
+    <b-form @submit="testMethod">
       <h1>add</h1>
       <b-form-group id="input-group-1" label="ID of item" label-for="input-1">
         <b-form-input
           id="input-1"
-          v-model="SID"
+          v-model="form.SID"
           type="number"
           placeholder="Enter ID"
         ></b-form-input>
@@ -18,7 +18,7 @@
       >
         <b-form-input
           id="input-2"
-          v-model="description"
+          v-model="form.description"
           placeholder="Enter description"
         ></b-form-input>
       </b-form-group>
@@ -30,7 +30,7 @@
       >
         <b-form-input
           id="input-2"
-          v-model="category"
+          v-model="form.category"
           placeholder="Enter category"
         ></b-form-input>
       </b-form-group>
@@ -44,26 +44,23 @@ export default {
   name: "add",
   data() {
     return {
+      form:{
       SID: "",
       description: "",
       category: "",
+      }
+ 
     };
   },
   methods: {
     testMethod() {
-      fetch("http://localhost:5050/add", {
-        method: "POST",
-        body: JSON.parse({
-          SID:this.SID,
-          description: this.description,
-          category: this.category
-        }),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
+      fetch('http://localhost:5050/add',{
+        method: 'POST',
+        headers:{
+          'content-type': 'application/json'
         },
+        body: JSON.stringify(this.form)
       })
-        .then((response) => response.json())
-        .then((json) => console.log(json));
     },
   },
 };

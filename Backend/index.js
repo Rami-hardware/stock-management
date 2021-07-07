@@ -31,7 +31,7 @@ app.get("/", (req, res) => {
 });
 
 app.post('/add',(req, res) => {
-  res.json(console.log("this is working " + ' ' + req.body.form));
+  res.json(console.log("this is working " + ' ' + req.body.form.SID));
 })
 app.listen(5050, ()=>{
     console.log('listing at 5050')
