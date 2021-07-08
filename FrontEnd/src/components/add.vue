@@ -53,6 +53,7 @@ export default {
   },
   methods: {
     send(){
+      event.preventDefault();
       let use = this;
       axios.post('http://localhost:5050/add',this.form)
       .then((response) => {use.from = response.data})

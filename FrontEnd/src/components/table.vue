@@ -64,7 +64,7 @@ data() {
       }
     },methods:{
       get(){
-         fetch("http://localhost:5050").then(response => response.json()).then(data => (this.items = data))
+          fetch("http://localhost:5050").then(response => response.json()).then(data => (this.items = data))
       }
     },mounted(){
       this.get();
@@ -73,7 +73,7 @@ data() {
     computed: {
       rows() {
         return this.items.length
-      }
+      },
     }
 }
 </script>

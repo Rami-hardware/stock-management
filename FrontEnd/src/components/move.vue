@@ -2,6 +2,15 @@
   <div>
     <b-form @submit.prevent="send">
       <h1>move</h1>
+      <b-form-group id="input-group-2" label="enter SID of item" label-for="input-2">
+        <b-form-input
+          id="input-2"
+          v-model="form.SID"
+          placeholder="from"
+          required
+          name="SID"
+        ></b-form-input>
+      </b-form-group>
     <b-form-group id="input-group-2" label="enter were the item coming from" label-for="input-2">
         <b-form-input
           id="input-2"
@@ -32,6 +41,7 @@ export default {
     data(){
       return{
         form:{
+          SID:null,
           to:null,
           from:null,
         }
@@ -42,11 +52,12 @@ export default {
   },
   methods: {
     send(){
+      event.preventDefault();
       let use = this;
       axios.post('http://localhost:5050/move',this.form)
       .then((response) => {use.from = response.data})
       .catch(err => alert(err))
     }
-  }
+  },
 }
 </script>

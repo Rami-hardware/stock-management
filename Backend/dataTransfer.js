@@ -1,5 +1,4 @@
 const fs = require("fs");
-
 module.exports.save = (filename , json) =>{
     return fs.writeFileSync(filename,JSON.stringify(json))
 }
