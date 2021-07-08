@@ -31,10 +31,15 @@ app.get("/", (req, res) => {
   res.json(dataT.load("records.json"));
 });
 app.post('/add',(req, res) => {
-  let add = {
-    id: req.body.form.id
-  }  
-  res.json(console.log("this is working " + add.id));
+  let id = req.body.id
+  let category = req.body.category
+  let description = req.body.description
+  res.json(console.log("this is working " + id+ ' ' + category + ' '+ description));
+})
+app.post('/move' , (req,res) =>{
+  let to_ = req.body.to;
+  let from_ = req.body.from;
+  res.json(console.log("this is working " + to_ + ' ' + from_))
 })
 app.listen(5050, ()=>{
     console.log('listing at 5050')

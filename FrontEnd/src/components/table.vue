@@ -32,6 +32,11 @@
       :filter="filter"
       :filter-included-fields="filterOn"
       small
+      striped 
+      hover
+      noCollapse
+      outlined
+      bordered
     ></b-table>
     <div class="overflow-auto">
     <b-pagination
