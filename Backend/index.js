@@ -1,7 +1,6 @@
 //all the reqires
 const express = require("express");
 const database = require("./database");
-const dataT = require("./dataTransfer");
 const cors = require("cors")
 const bodyParser = require("body-parser");
 
@@ -11,17 +10,26 @@ app.use(bodyParser.json())
 app.use(cors())
 //save & show all records & Oracle DB connction
 database.con()
+
 //passing JSON File to Vue
 app.get("/", (req, res) => {
   console.log("Records has been send");
-  res.json(dataT.load("records.json"));
+  database.connection.connect(function (err) {
+    if (err) throw err;
+    let query = "select  * from items"
+    database.connection.query(query, (err, result,)=>{
+        if (err) throw err;
+        res.json(result)
+      }
+    );
+  });
 });
 app.post('/add',(req, res) => {
   let id = req.body.id
   let category = req.body.category
   let description = req.body.description
   console.log("data has been added")
-  res.json(database.add());
+  res.json(database.add(id,category,description));
 })
 app.post('/move' , (req,res) =>{
   let to = req.body.to;

@@ -16,17 +16,6 @@ module.exports.con = () =>{
 });
 }
 //Select query
-module.exports.select = () =>{
-  con.connect(function (err) {
-      if (err) throw err;
-      let query = "select  * from items"
-      con.query(query, (err, result,)=>{
-          if (err) throw err;
-          dataT.save("records.json" , result)
-        }
-      );
-    });
-} 
 //add items 
 module.exports.add = (id,description,category) =>{
   let query = `insert into items (SID,item_description,category) values ('${id}','${description}', '${category}');`
