@@ -1,7 +1,6 @@
 <template>
   <div>
-      <b-row>
-      
+    <b-row>
       <b-col lg="6" class="my-1">
         <b-form-group
           label="Filter"
@@ -21,59 +20,79 @@
           </b-input-group>
         </b-form-group>
       </b-col>
-
-
     </b-row>
     <b-table
       id="my-table"
-      :items="items"
+      :items="formartedItems"
       :per-page="perPage"
       :current-page="currentPage"
       :filter="filter"
       :filter-included-fields="filterOn"
+      :field="formartedItems"
       small
-      striped 
+      striped
       hover
       noCollapse
       outlined
       bordered
     ></b-table>
     <div class="overflow-auto">
-    <b-pagination
-      v-model="currentPage"
-      :total-rows="rows"
-      :per-page="perPage"
-      aria-controls="my-table"
-    ></b-pagination>
+      <b-pagination
+        v-model="currentPage"
+        :total-rows="rows"
+        :per-page="perPage"
+        aria-controls="my-table"
+      ></b-pagination>
+    </div>
   </div>
-  </div>
-
-  
 </template>
 
 <script>
-export default{
-name:"records",
-data() {
-      return {
-        perPage: 3,
-        currentPage: 1,
-        filter: null,
-        filterOn: [],
-        items: []
-      }
-    },methods:{
-      get(){
-          fetch("http://localhost:5050").then(response => response.json()).then(data => (this.items = data))
-      }
-    },mounted(){
-      this.get();
-      this.totalRows = this.items.length;
+export default {
+  name: "records",
+  data() {
+    return {
+      perPage: 3,
+      currentPage: 1,
+      filter: null,
+      filterOn: [],
+      items: [],
+      field: [],
+    };
+  },
+  methods: {
+    get() {
+      fetch("http://localhost:5050")
+        .then((response) => response.json())
+        .then((data) => (this.items = data));
     },
-    computed: {
-      rows() {
-        return this.items.length
-      },
-    }
-}
+    getVariant(status) {
+      switch (status) {
+        case 'yes':
+          return "success";
+        case 'no':
+          return "danger";
+        default:
+          return "Primary";
+      }
+    },
+  },
+  mounted() {
+    this.get();
+    this.totalRows = this.items.length;
+    this.getVariant()
+  },
+  computed: {
+    rows() {
+      return this.items.length;
+    },
+    formartedItems() {
+      if (!this.items) return [];
+      return this.items.map((item) => {
+        item._rowVariant = this.getVariant(item.IsActive);
+        return item;
+      });
+    },
+  },
+};
 </script>
