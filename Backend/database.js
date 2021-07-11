@@ -32,4 +32,5 @@ module.exports.move = (id,from,to)=>{
       console.log('item moved')
   })
 }
+//using mySQL module outside
 module.exports.connection = con;

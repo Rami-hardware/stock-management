@@ -1,17 +1,24 @@
 <template >
-  <div>
+  <div class="con">
+    <!--the form to send new data to Database-->
     <b-form @submit.prevent="send">
       <h1>move</h1>
-      <b-form-group id="input-group-2" label="enter SID of item" label-for="input-2">
+      <!--alert apper when u click to modify data-->
+      <b-alert v-model="showAlert">item moved </b-alert>
+      <!--alert apper when u click to modify data-->
+      <!--id-->
+      <b-form-group id="input-group-2" label="enter SID of item" label-for="input-2" class="spacing">
         <b-form-input
           id="input-2"
           v-model="form.SID"
-          placeholder="from"
+          placeholder="enter SID number"
           required
           name="SID"
         ></b-form-input>
       </b-form-group>
-    <b-form-group id="input-group-2" label="enter were the item coming from" label-for="input-2">
+      <!--id-->
+      <!--from-->
+    <b-form-group id="input-group-2" label="enter were the item coming from" label-for="input-2" class="spacing">
         <b-form-input
           id="input-2"
           v-model="form.from"
@@ -20,7 +27,9 @@
           name="from"
         ></b-form-input>
       </b-form-group>
-      <b-form-group id="input-group-2" label="enter were u want to send the item" label-for="input-2">
+      <!--from-->
+      <!--to-->
+      <b-form-group id="input-group-2" label="enter were u want to send the item" label-for="input-2" class="spacing">
         <b-form-input
           id="input-2"
           v-model="form.to"
@@ -29,9 +38,11 @@
           name="to"
         ></b-form-input>
       </b-form-group>
-      <b-button type="submit" variant="primary">Submit</b-button>
+      <!--to-->
+      <b-button type="submit" @click="showAlert=true" variant="primary" class="btn-move">move</b-button>
       </b-form>
   </div>
+      <!--the form to send new data to Database-->
 </template>
 
 <script>
@@ -40,17 +51,22 @@ export default {
     name:"move",
     data(){
       return{
+        //take data using v-model
         form:{
           SID:null,
           to:null,
           from:null,
-        }
+        },
+        //hide the alert 
+        showAlert:false
       }
     },
     mounted(){
+      //create instance of send()
     this.send();
   },
   methods: {
+    //endpoint to send data to Database
     send(){
       event.preventDefault();
       let use = this;
@@ -61,3 +77,7 @@ export default {
   },
 }
 </script>
+
+<style lang="scss">
+
+</style>

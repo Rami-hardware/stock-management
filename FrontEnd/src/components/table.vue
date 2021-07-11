@@ -1,9 +1,9 @@
 <template>
   <div>
+    <!--filter-->
     <b-row>
       <b-col lg="6" class="my-1">
         <b-form-group
-          label="Filter"
           label-for="filter-input"
           label-cols-sm="3"
           label-align-sm="right"
@@ -21,6 +21,8 @@
         </b-form-group>
       </b-col>
     </b-row>
+    <!--filter-->
+    <!--table-->
     <b-table
       id="my-table"
       :items="formartedItems"
@@ -36,6 +38,8 @@
       outlined
       bordered
     ></b-table>
+    <!--table-->
+    <!--pagination-->
     <div class="overflow-auto">
       <b-pagination
         v-model="currentPage"
@@ -43,6 +47,7 @@
         :per-page="perPage"
         aria-controls="my-table"
       ></b-pagination>
+      <!--pagination-->
     </div>
   </div>
 </template>
@@ -52,20 +57,26 @@ export default {
   name: "records",
   data() {
     return {
-      perPage: 3,
+      //set how many page will apper in screen
+      perPage: 5,
+      //set the current page in table
       currentPage: 1,
+      //filter from the field
       filter: null,
+      //select the field u want to filter
       filterOn: [],
+      //all record will seved here
       items: [],
-      field: [],
     };
   },
   methods: {
+    //get records from database
     get() {
       fetch("http://localhost:5050")
         .then((response) => response.json())
         .then((data) => (this.items = data));
     },
+    // set Variant to row depending on color
     getVariant(status) {
       switch (status) {
         case 'yes':
@@ -73,7 +84,7 @@ export default {
         case 'no':
           return "danger";
         default:
-          return "Primary";
+          return "info";
       }
     },
   },
@@ -83,9 +94,11 @@ export default {
     this.getVariant()
   },
   computed: {
+    //count the rows
     rows() {
       return this.items.length;
     },
+    //get all the records and set Variant
     formartedItems() {
       if (!this.items) return [];
       return this.items.map((item) => {

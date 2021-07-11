@@ -1,37 +1,49 @@
 <template>
-  <div>
+  <div class="con">
+    <!--the form to send new data to Database-->
     <b-form @submit.prevent="send">
       <h1>add</h1>
-    <b-form-group id="input-group-2" label="enter the id of item" label-for="input-2">
+    <!--alert apper when u click to send data-->
+      <b-alert v-model="showAlert">you have added your item</b-alert>
+    <!--alert apper when u click to send data-->
+    <!--id-->
+    <b-form-group id="input-group-2" label="enter the id of item" label-for="input-2" class="spacing">
         <b-form-input
           id="input-2"
           v-model="form.id"
           placeholder="Enter id"
-          required
           type="number"
           name="id"
         ></b-form-input>
       </b-form-group>
-      <b-form-group id="input-group-2" label="enter description of item" label-for="input-2">
+      <!--id-->
+      <!--description-->
+      <b-form-group id="input-group-2" label="enter description of item" label-for="input-2" class="spacing">
         <b-form-input
           id="input-2"
           v-model="form.description"
           placeholder="Enter description"
-          required
           name="description"
         ></b-form-input>
       </b-form-group>
-      <b-form-group id="input-group-2" label="enter category of item" label-for="input-2">
+      <!--description-->
+      <!--category-->
+      <b-form-group id="input-group-2" label="enter category of item" label-for="input-2" class="spacing">
         <b-form-input
           id="input-2"
           v-model="form.category"
           placeholder="Enter category"
-          required
           name="category"
         ></b-form-input>
       </b-form-group>
-      <b-button type="submit" variant="primary">Submit</b-button>
+      <!--category-->
+      <!--button-->
+      <b-button type="submit" @click="showAlert=true" class="btn-add"> 
+        <span>add</span>
+        </b-button>
+        <!--button-->
       </b-form>
+      <!--the form to send new data to Database-->
   </div>
 </template>
 
@@ -41,17 +53,22 @@ export default {
   name: "add",
   data() {
     return{
+      //take data using v-model
       form:{
         id: '',
         description:'',
         category:''
-      }
+      },
+      //hide alert
+      showAlert: false
     }
   },
   mounted(){
+    //create instance of send()
     this.send();
   },
   methods: {
+    //endpoint to send data to Database
     send(){
       event.preventDefault();
       let use = this;

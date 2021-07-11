@@ -1,0 +1,59 @@
+//all colors
+$body-bg:#E6F0FF;
+$transparent-bg:transparent;
+$name:add;
+body{
+    background-color: #E6F0FF;
+    text-transform: capitalize;
+}
+
+
+.con{
+    background-color: #fff;
+    padding-bottom: 25px;
+    .spacing{
+        padding:0px 15px 30px 15px;
+    }
+    
+    .btn-add{
+        padding: 15px 25px;
+        font-size: 24px;
+        text-align: center;
+        cursor: pointer;
+        outline: none;
+        color: #fff;
+        background-color: #04AA6D;
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 9px #999;
+        &:hover{
+            background-color: #3e8e41
+        }
+        &:active{
+            background-color: #3e8e41;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+        }
+    }    
+    .btn-move{
+        padding: 15px 25px;
+        font-size: 24px;
+        text-align: center;
+        cursor: pointer;
+        outline: none;
+        color: #fff;
+        background-color: royalblue;
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 9px #999;
+        &:hover{
+            background-color: #3e8e41
+        }
+        &:active{
+            background-color: #3e8e41;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+        }
+    }
+
+}
